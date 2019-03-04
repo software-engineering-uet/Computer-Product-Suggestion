@@ -1,0 +1,14 @@
+#title{
+    font-family: fantasy;
+    font-size:  25px;
+    
+}
+body {
+    background-image: url("../img/background.png");
+}
+footer {
+    background: #0062cc;
+    bottom: 0px;
+ }
+
+
