@@ -8,6 +8,9 @@ var con = mysql.createConnection({
     user: 'root',
     password: '123456789'
 });
+con.connect(function (err) {
+    console.log("Connected");
+});
 app.use(express.static("public"));
 app.set('view engine' , 'ejs');
 app.set('views', 'views');
