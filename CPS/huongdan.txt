@@ -1,0 +1,18 @@
+HƯỚNG DẪN CHẠY PROJECT:
+
+1.Chạy file data.sql tại myphpadmin hoặc workbench để lấy CSDL
+
+2.Sửa cấu hình tại file app.js:
+
+var con = mysql.createConnection({
+  database: 'laptops',
+  host: 'localhost',
+  user: 'tên_username_database',
+  password: 'password_database'
+});
+
+3.Chạy node app.js
+
+4.vào trình duyệt => localhost:3000
+
+5.Done
