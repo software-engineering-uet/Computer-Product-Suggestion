@@ -1,0 +1,43 @@
+<%- include header%>
+<% if (message1.length > 0) { %>
+<script>
+    alert("<%= message1 %>");
+    window.location.replace("search");
+</script>
+
+<% } %>
+<div class="container" style="margin: 20px 0px 40px 0px ">
+    <h2 style="text-align: center; margin-top: 15px">Đề xuất sản phẩm</h2>
+    <form method="POST" action="/de-xuat">
+    <div class="row">
+            <div class="col-md-6">
+                <p style="text-align: center">Tên sản phẩm</p>
+            </div>
+            <div class="col-md-6">
+                <input type="text" placeholder="Tên" style="width: 100%" name="name"/>
+            </div>
+            <div class="col-md-6">
+                <p style="text-align: center">Link sản phẩm( ưu tiên linkFPTShop)</p>
+            </div>
+            <div class="col-md-6">
+                <input type="text" placeholder="Link sản phẩm" style="width: 100%" name="link"/>
+            </div>
+          
+            <div class="col-md-6">
+                <button onclick="dx()" class="btn btn-success"
+                    style="position: relative;top: 50%;left: 78%;transform: translate(-50%, -50%);"> Đề xuất</button>
+     </div>
+            </form>
+        <div class="col-md-6">
+            <a href="/search"><button type="button" class="btn btn-danger"
+                    style="position: relative;top: 50%;left: 15%;transform: translate(-50%, -50%);">Hủy bỏ</button></a>
+        </div>
+
+    </div>
+</div>
+<script>
+    function dx() {
+        alert("Đề xuất của bạn đã được ghi lại ! Chúng tôi cảm ơn bạn vì đã đóng góp cho chúng tôi !");
+    }
+</script>
+<%- include footer%>

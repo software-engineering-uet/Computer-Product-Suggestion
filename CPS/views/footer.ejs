@@ -1,0 +1,66 @@
+<div class="dark" >
+    <div class="container animate-box" id="fh5co-footer">
+        <div-- class="row">
+            <div class="col-sm-6">
+                <div><a class="nsavbar-brand" href="/">Computer Product<span class="navbar-brand2">
+                            Suggestion</span></a></div>
+                <br>
+                <div class="text-white" style="text-align: justify">Với những công cụ trực quan và đội ngũ chuyên
+                    nghiệp, chúng tôi tin rằng
+                    sẽ đưa cho bạn những sự lựa chọn tốt nhất về các sản phẩm máy tính mà bạn đang quan tâm.
+                </div>
+
+            </div>
+            <!--div class="col-sm-4"></div-->
+            <div class="col-sm-4">
+                <div class="icons">Website của chúng tôi</h3>
+                </div>
+                <br>
+                <table width="100%">
+                    <tr>
+                        <td><a class="text-white" href="#">Trang chủ</a></td>
+                        <td><a class="text-white" href="/search">Tìm kiếm</a></td>
+                    </tr>
+                    <tr>
+                        <td><a class="text-white" href="#">Về chúng tôi</a></td>
+                        <td><a class="text-white" href="#contact">Góp ý</a></td>
+                    </tr>
+
+                </table>
+            </div>
+    </div>
+</div>
+
+</body>
+<script lang="javascript">
+var login = document.getElementsByClassName("login-form");
+var re = document.getElementsByClassName("register-form");
+var lo_pa = document.getElementsByClassName("login-page");
+
+function h1() {
+    re[0].style.display = "block";
+    login[0].style.display = "none";
+}
+function h2() {
+    re[0].style.display = "none";
+    login[0].style.display = "block";
+}
+function h3() {
+    lo_pa[0].style.display = "block";
+}
+window.onclick = function (event) {
+    if (event.target == lo_pa[0]) {
+        h2();
+        lo_pa[0].style.display = "none";
+    }
+}
+</script>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/fontawesome.js"></script>
+<script src="./js/jquery.waypoints.min.js"></script>
+<script src="./js/animate.js"></script>
+
+</body>
+
+</html>

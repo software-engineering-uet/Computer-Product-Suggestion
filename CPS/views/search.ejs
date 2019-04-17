@@ -1,117 +1,117 @@
-<!DOCTYPE html>
-<html lang="en" class="no-js">
+<%- include header %>
+<style>
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: white;
+    }
 
-<head>
-    <title>Tìm kiếm</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/animate.css" />
-    <script src="./js/modernizr-3.5.0.min.js"></script>
-    <script src = "./js/animate.js"></script>
-</head>
+    li {
+        float: left;
+    }
 
-<body>
+    li a {
+        display: block;
+        color: blue;
+        text-align: center;
+        padding: 15px;
+        text-decoration: none;
+    }
+</style>
+<div class="form-group container">
+    <input type="text" id="search-text" class="form-control" placeholder="Tìm kiếm">
+    <span><a id="search" onclick="timkiem()" class="btn btn-primary" role="button">Tìm kiếm</a></span>
+</div>
 
-    <nav class="navbar navbar-expand-lg nav-bar navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="/">Computer Product <span class="navbar-brand2"> Suggestion</span></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto navi">
-                    <li class="nav-item">
-                        <a class="nav-link nav-btn" href="/"><img src="img/icon/home.png"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-btn" href="search"><img src="img/icon/search.png"></a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link nav-btn" href="#"><img src="img/icon/shopping-cart.png"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-btn" href="#"><img src="img/icon/ranking.png"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-btn" href="#"><img src="img/icon/avatar.png"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-btn" href="#" style="margin-top: 5px">Xin chào, Guest</a>
-                    </li>
-                </ul>
-            </div>
+<div class="container" id="main" style="margin-bottom: 30px">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <ul>
+                <li><a href="tat-ca/duoi-5tr">
+                        <h5>Dưới 5 triệu</h5>
+                    </a></li>
+                <li><a href="tat-ca/tu-5-10tr">
+                        <h5>Từ 5-10 triệu</h5>
+                    </a></li>
+                <li><a href="tat-ca/tu-10-15tr">
+                        <h5>Từ 10 - 15 triệu</h5>
+                    </a></li>
+                <li><a href="tat-ca/tu-15-20tr">
+                        <h5>Từ 15 - 20 triệu</h5>
+                    </a></li>
+                <li><a href="tat-ca/tren-20tr">
+                        <h5>Trên 20 triệu</h5>
+                    </a></li>
+                <li><a href="tat-ca">
+                        <h5>Xem tất cả</h5>
+                    </a></li>
+            </ul>
         </div>
-    </nav>
-    <div class="form-group container">
-        <input type="text" name="" id="search-text" class="form-control" placeholder="Tìm kiếm">
-        <span><a name="" id="search" class="btn btn-primary" href="#" role="button">Tìm kiếm</a></span>
     </div>
+    <% if (laps.length == 0) { %>
+    <div class="container" style="height: 100px;">
+        <h3>Không tìm thấy laptop !!! Bạn có muốn <a href="de-xuat">đề xuất sản phẩm</a> này không ?</h3>
+    </div>
+    <% } %>
+    <div class="row">
 
-
-    <div class="container" id="main">
-        <div class="row">
-            <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    <img src="img/laptop/mac.jpg" alt="Thêm">
+        <% laps.forEach(function(lap){ %>
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <a style="color: #212529"
+                    href=<%="chi-tiet/" + lap.id + "/" + lap.Name.split(" ").join("-").split('/').join('-')%>><img
+                        src=<%= lap.Src_img %> title=<%=lap.Name%>>
                     <div class="caption">
-                        <h3>Thumbnail label</h3>
-                        <p>...</p>
-                        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#"
-                                class="btn btn-default" role="button">Button</a></p>
-                    </div>
-                </div>
+                        <h5><b><%=lap.Name %></b></h5>
+                </a>
+                <% var pri = lap.Price.toString().slice(-8,-6)+'.'+lap.Price.toString().slice(-6,-3) + '.' +lap.Price.toString().slice(-3)%>
+                <h4><b><i><%=pri %></i></b></h4>
+                <p><b>CPU: </b><%=lap.CPU%></p>
+                <p><b>RAM: </b><%=lap.RAM%></p>
+                <p><b>Màn hình: </b><%=lap.Display%></p>
+                <p><b>VGA: </b><%=lap.VGA%></p>
+                <% if (data == "Guest" ) { %>
+                <span><button class="btn btn-primary" role="button" onclick="them_guest()">
+                        Thêm vào so
+                        sánh</button> <a
+                        href=<%="chi-tiet/" + lap.id + "/" + lap.Name.split(" ").join("-").split('/').join('-')%>
+                        class="btn btn-default" role="button">Chi tiết</a></span>
+                <% } else {%>
+                <form method="post" action="/danhsach" style="display: inline;"> 
+                    <input type="hidden" name="id" value=<%= lap.id %> />
+                    <button class="btn btn-primary">Thêm vào danh
+                        sách
+                        so sánh</button>
+                </form> <a
+                        href=<%="chi-tiet/" + lap.id + "/" + lap.Name.split(" ").join("-").split('/').join('-')%>
+                        class="btn btn-default" role="button">Chi tiết</a>
+                <% } %>
             </div>
-            
-    <div class="dark">
-        <div class="container animate-box" id="fh5co-footer">
-            <div-- class="row">
-                <div class="col-sm-6">
-                    <div><a class="nsavbar-brand" href="#">Computer Product<span class="navbar-brand2">
-                                Suggestion</span></a></div>
-                    <br>
-                    <div class="text-white" style="text-align: justify">Với những công cụ trực quan và đội ngũ chuyên
-                        nghiệp, chúng tôi tin rằng
-                        sẽ đưa cho bạn những sự lựa chọn tốt nhất về các sản phẩm máy tính mà bạn đang quan tâm.
-                    </div>
-
-                </div>
-                <!--div class="col-sm-4"></div-->
-                <div class="col-sm-4">
-                    <div class="icons">Website của chúng tôi</h3>
-                    </div>
-                    <br>
-                    <table width="100%">
-                        <tr>
-                            <td><a class="text-white" href="#!">Trang chủ</a></td>
-                            <td><a class="text-white" href="#fh5co-pricing">Tìm kiếm</a></td>
-                        </tr>
-                        <tr>
-                            <td><a class="text-white" href="#!">Về chúng tôi</a></td>
-                            <td><a class="text-white" href="#contact">Góp ý</a></td>
-                        </tr>
-
-                    </table>
-                </div>
         </div>
     </div>
+    <% }) %>
+</div>
+</div>
+<script>
+    function timkiem() {
+        var s = document.getElementById("search-text").value;
+        s = s.split(" ").join("&");
+        s = s.split('/').join('-');
+        window.location.replace("search/" + s);
+    }
+    function them_guest() {
+        alert("Bạn cần đăng nhập để thực hiện chức năng này !!");
+    }
+    document.getElementById("search-text")
+        .addEventListener("keyup", function (event) {
+            event.preventDefault();
+            if (event.keyCode === 13) {
+                document.getElementById("search").click();
+            }
+        });
 
-
-    <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>-->
-    <script src="./js/jquery.min.js"></script>
-    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>-->
-    <script src="./js/bootstrap.min.js"></script>
-    <!--<script src="https://use.fontawesome.com/8e45396e2e.js"></script>-->
-    <script src="./js/fontawesome.js"></script>
-    <script src="./js/jquery.waypoints.min.js"></script>
-    <script src="./js/animate.js"></script>
-
-</body>
-
-</html>
+</script>
+<%- include footer %>
