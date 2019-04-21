@@ -51,4 +51,4 @@ app.get("/tat-ca/:lc", kqs.lch);
 app.get("/admin/update", function (req, res) {
   update.update_hdd(), { message: "" };
 });
-//update_bm.upd_vga();
+update_bm.upd_cpu();

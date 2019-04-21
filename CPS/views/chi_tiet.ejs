@@ -8,7 +8,7 @@
         </div>
         <div class="col-md-5" style="margin-top:20px; font-size : 20px">
             <% var pri = laps[0].Price.toString().slice(-8,-6)+'.'+laps[0].Price.toString().slice(-6,-3) + '.' +laps[0].Price.toString().slice(-3)%>
-            <h3><b><i><%=pri %></i></b></h3>
+            <h3><b><i><%=pri %> \t a</i></b></h3>
             <p><b>CPU: </b><%=laps[0].CPU%></p>
             <p><b>RAM: </b><%=laps[0].RAM%></p>
             <p><b>HDD: </b><%=laps[0].HDD%></p>
@@ -29,9 +29,12 @@
                     fptShop</button></a>
         </div>
         <div class="col-md-3" style="margin-top:20px; font-size : 20px">
-            <h3><b>Điểm số CPS</b></h3>
-            <p>80</p>
-            <p>100</p>
+            <h3 style="text-align: center" ><b>Điểm số CPS</b></h3>
+            <h3 style="text-align: center; color: red"><%=diem[0].diemCPU == null ? 0 : diem[0].diemCPU %></h3>
+            <h3 style="text-align: center; color: red"><%=diem[0].diemRam == null ? 0 : diem[0].diemRam%></h3>
+            <h3 style="text-align: center; color: red"><%=diem[0].diemHDD == null ? 0 : diem[0].diemHDD%></h3>
+            <h3 style="text-align: center; color: red"><%=diem[0].diemMH == null ? 0 : diem[0].diemMH%></h3>
+            <h3 style="text-align: center; color: red"><%=diem[0].diemVGA == null ? 0 : diem[0].diemVGA%></h3>
         </div>
     </div>
     <h3> Các sản phẩm khác </h3>

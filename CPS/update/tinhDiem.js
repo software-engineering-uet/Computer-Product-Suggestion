@@ -32,3 +32,6 @@ exports.tinhDiemMH = function (mh) {
 
     return score;
 }
+exports.diemCPU = function (){
+    
+}

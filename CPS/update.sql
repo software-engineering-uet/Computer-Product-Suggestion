@@ -1,0 +1,1 @@
+UPDATE diemLaptop d SET diemRam = (SELECT diem100 FROM DiemRAM dr WHERE dr.NameRAM = (SELECT RAM FROM laptop_details dl WHERE dl.id = d.id ))

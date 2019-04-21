@@ -6,12 +6,22 @@ exports.details = function (req, res) {
     for (var i = 1; i < 5; i++) {
         que += " OR id = " + ((Number(id) + i) % 156 + 1);
     }
-    db.query(que, function (err, result) {
-        if (err) throw err;
-        else {
-            res.render('chi_tiet.ejs', { message: message, data: (sess.user == undefined) ? "Guest" : sess.user.username, laps: result });
-        }
+    var q = "SELECT * FROM diemLaptop WHERE id = " + id;
+    var l = function (callback) {
+        db.query(q,function(err,resu){
+            callback (null, resu)
+        })
+    }
+    l (function (err,resu){
+        db.query(que, function (err, result) {
+            console.log(resu);
+            if (err) throw err;
+            else {
+                res.render('chi_tiet.ejs', { message: message, data: (sess.user == undefined) ? "Guest" : sess.user.username, laps: result, diem: resu });
+            }
+        })
     })
+    
 }
 exports.sosanh = function (req, res) {
     var sess = req.session;
