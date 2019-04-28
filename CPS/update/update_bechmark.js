@@ -151,9 +151,50 @@ exports.upd_mh = function (req, res) {
     })
 
 };
-// exports.upd_hdd = function (req,res){
+exports.upd_hdd = function (req,res){
+    db.query('TRUNCATE DiemHDD');
+    var li_hdd = [];
+    var d_max = 0;
+    var getLihdd = function (callback) {
+        var query = "SELECT HDD FROM laptop_details";
+        db.query(query, function (err, res, fieds) {
+            if (err) callback(err);
+            else {
+                if (res.length) {
+                    for (i in res)
+                        li_hdd.push(res[i].HDD.trim());
+                }
+            }
+            callback(null, li_hdd);
+        });
+    }
+    getLihdd(function (err, li_hdd) {
+        if (err) throw err;
+        else {
+            for (i in li_hdd) {
+                var score = tinhDiem.diemhdd(li_hdd[i]);
+                if (d_max < score) d_max = score;
+                var query = "INSERT INTO DiemHDD(Name , Diem) VALUES('" + li_hdd[i] + "'," + score + ")";
+                db.query(query, function (err) {
+                    if (err) console.log(err);
+                })
+            }
+        }
+        db.query("DELETE n1 FROM DiemHDD n1, DiemHDD n2 WHERE n1.Name = n2.Name AND n1.id > n2.id");
+        db.query("SELECT id,Diem FROM DiemHDD", function (err, resu) {
+            if (resu.length) {
+                for (i in resu) {
+                    var d = resu[i].Diem / d_max;
+                    d = d.toPrecision(4) * 100;
+                    d = d.toFixed(2);
 
-// };
+                    db.query("UPDATE DiemHDD SET Diem100 = " + d + " WHERE id = " + resu[i].id);
+                }
+            }
+        })
+    })
+};
+
 exports.upd_vga = function (req, res) {
     db.query("TRUNCATE diemVGA", function (err) {
         if (err) console.log("Không thể truncate VGA data");

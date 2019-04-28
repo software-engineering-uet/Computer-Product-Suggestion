@@ -224,3 +224,6 @@ table {
     margin-top: 15px;
     
 }
+.table-borderless tbody td{
+    font-size: 20px;
+}

@@ -15,7 +15,8 @@ var con = mysql.createConnection({
   database: 'laptops',
   host: 'localhost',
   user: 'hieu',
-  password: '123456789'
+  password: '123456789',
+  port : 3306
 });
 con.connect(function (err) {
   if (err) console.log(err);
@@ -48,7 +49,4 @@ app.get("/danhsach", chitiet.them);
 app.get("/search/:nd", user.kq);
 app.get("/tat-ca", kqs.tatca);
 app.get("/tat-ca/:lc", kqs.lch);
-app.get("/admin/update", function (req, res) {
-  update.update_hdd(), { message: "" };
-});
-update_bm.upd_cpu();
+update_bm.upd_hdd();

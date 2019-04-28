@@ -1,42 +1,57 @@
 <%- include header %>
 <div class="container" style="height : 100%">
-    <h3 style="margin-top:20px"><%= laps[0].Name %></h3>
+    <h2 style="margin-top:20px"><%= laps[0].Name %></h2>
     <div class="row" style="margin-bottom: 25px">
 
         <div class="col-md-4">
-            <img src=<%=laps[0].Src_img %> style="width: 85%; position: relative; left: 12px; top: 1px;">
+            <img src=<%=laps[0].Src_img %> style="width: 90%;height: 300px; position: relative; left: 12px; top: 1px;">
         </div>
-        <div class="col-md-5" style="margin-top:20px; font-size : 20px">
-            <% var pri = laps[0].Price.toString().slice(-8,-6)+'.'+laps[0].Price.toString().slice(-6,-3) + '.' +laps[0].Price.toString().slice(-3)%>
-            <h3><b><i><%=pri %> \t a</i></b></h3>
-            <p><b>CPU: </b><%=laps[0].CPU%></p>
-            <p><b>RAM: </b><%=laps[0].RAM%></p>
-            <p><b>HDD: </b><%=laps[0].HDD%></p>
-            <p><b>Màn hình: </b><%=laps[0].Display%></p>
-            <p><b>VGA: </b><%=laps[0].VGA%></p>
-            <% if (data == "Guest") { %>
-            <button type="button" class="btn btn-success" onclick="them_guest()">Thêm vào danh sách so sánh</button>
-            <% } else { %>
-            <form method="post" action="/danhsach" style="display: inline;"> 
-                <input type="hidden" name="id" value=<%= laps[0].id %> />
-                <button class="btn btn-success">Thêm vào danh
-                    sách
-                    so sánh</button>
-            </form>
-
-            <% } %>
-            <a href=<%=laps[0].Link_sp %> target="_blank"><button type="button" class="btn btn-info">Link
-                    fptShop</button></a>
-        </div>
-        <div class="col-md-3" style="margin-top:20px; font-size : 20px">
-            <h3 style="text-align: center" ><b>Điểm số CPS</b></h3>
-            <h3 style="text-align: center; color: red"><%=diem[0].diemCPU == null ? 0 : diem[0].diemCPU %></h3>
-            <h3 style="text-align: center; color: red"><%=diem[0].diemRam == null ? 0 : diem[0].diemRam%></h3>
-            <h3 style="text-align: center; color: red"><%=diem[0].diemHDD == null ? 0 : diem[0].diemHDD%></h3>
-            <h3 style="text-align: center; color: red"><%=diem[0].diemMH == null ? 0 : diem[0].diemMH%></h3>
-            <h3 style="text-align: center; color: red"><%=diem[0].diemVGA == null ? 0 : diem[0].diemVGA%></h3>
-        </div>
-    </div>
+    <div class="col-md-8">
+    <table class="table table-borderless">
+        <tbody>
+            <tr>
+                <% var pri = laps[0].Price.toString().slice(-8,-6)+'.'+laps[0].Price.toString().slice(-6,-3) + '.' +laps[0].Price.toString().slice(-3)%>
+                <td style="width: 65%"><h2><b><i><%=pri %></i></b></h2></td>
+                <td style="text-align: center"><h2><b><i>Điểm số CPS</i></b></h2></td>
+            </tr>
+            <tr>
+                <td><b>CPU: </b><%=laps[0].CPU%></td>
+                <td><h3 style="text-align: center; color: red"><%=diem[0].diemCPU == null ? 0 : diem[0].diemCPU %></h3></td>
+            </tr>
+            <tr>
+                <td><b>RAM: </b><%=laps[0].RAM%></td>
+                <td><h3 style="text-align: center; color: red"><%=diem[0].diemRam == null ? 0 : diem[0].diemRam%></h3></td>
+            </tr>
+            <tr>
+                <td><b>HDD: </b><%=laps[0].HDD%></td>
+                <td><h3 style="text-align: center; color: red"><%=diem[0].diemHDD == null ? 0 : diem[0].diemHDD%></h3></td>
+            </tr>
+            <tr>
+                <td><b>Màn hình: </b><%=laps[0].Display%></td>
+                <td><h3 style="text-align: center; color: red"><%=diem[0].diemMH == null ? 0 : diem[0].diemMH%></h3></td>
+            </tr>
+            <tr>
+                <td><b>VGA: </b><%=laps[0].VGA%></td>
+                <td><h3 style="text-align: center; color: red"><%=diem[0].diemVGA == null ? 0 : diem[0].diemVGA%></h3></td>
+            </tr>
+            <tr>
+                <td><% if (data == "Guest") { %>
+                    <button type="button" class="btn btn-success" onclick="them_guest()">Thêm vào danh sách so sánh</button>
+                    <% } else { %>
+                    <form method="post" action="/danhsach" style="display: inline;"> 
+                        <input type="hidden" name="id" value=<%= laps[0].id %> />
+                        <button class="btn btn-success">Thêm vào danh
+                            sách so sánh</button>
+                    </form>
+        
+                    <% } %>
+                    <a href=<%=laps[0].Link_sp %> target="_blank"><button type="button" class="btn btn-info">Link
+                            fptShop</button></a></td>
+                            <td>Chung: <h1 style="display: inline;color: red"><u><i><%=diem[0].diemTong == null ? 0 : diem[0].diemTong%></i></u></h1></td>
+            </tr>
+        </tbody>
+      </table>
+      </div> </div>
     <h3> Các sản phẩm khác </h3>
     <div class="container">
         <div class="row">

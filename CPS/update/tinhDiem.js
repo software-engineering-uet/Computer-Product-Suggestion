@@ -32,6 +32,31 @@ exports.tinhDiemMH = function (mh) {
 
     return score;
 }
-exports.diemCPU = function (){
-    
+exports.diemhdd = function (hdd){
+    var score = 100;
+    var temp = hdd.split(" ").join("").toLowerCase();
+    if (temp.indexOf('ssd+hdd') >= 0 || temp.indexOf('hdd+ssd') >= 0 ){
+        score += 500;
+    }
+    else if (temp.indexOf('ssd') >= 0 && temp.indexOf('khe') >= 0){
+        score +=100;
+        if (temp.indexOf('1tb') >= 0 || temp.indexOf('1000gb') >= 0) score += 200;
+        else if (temp.indexOf('512gb') >= 0 || temp.indexOf('500gb') >= 0) score +=100;
+    }
+    else if (temp.indexOf('ssd') >= 0){
+        score += 300;
+        if (temp.indexOf('128gb') >= 0) score+=50;
+        else if (temp.indexOf('256gb') >= 0) score+=100;
+        else if (temp.indexOf('512gb') >= 0 || temp.indexOf('500gb') >= 0) score+=200;
+    }
+    else if (temp.indexOf('sshd') >= 0){
+        score += 150;
+        if (temp.indexOf('512gb') >= 0  || temp.indexOf('500gb') >= 0) score+=100;
+        else if (temp.indexOf('1tb') >= 0 || temp.indexOf('1000gb') >= 0) score+=200;
+    }
+    else {
+        if (temp.indexOf('1tb') >= 0 || temp.indexOf('1000gb') >= 0) score+=200;
+        if (temp.indexOf('512gb') >= 0  || temp.indexOf('500gb') >= 0) score+=100;
+    }
+    return score;
 }

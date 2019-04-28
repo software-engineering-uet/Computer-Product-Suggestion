@@ -15,22 +15,24 @@ exports.update_hdd = function () {
         });
     }
     getLiLink(function (err, li_link) {
-        var li = [];
-        var n = 0;
         if (err) throw err;
         else {
-            for (var i = 0 ;i <li_link ;i++) {
-                request(li_link[i], function (err, respone, body) {
-                    if (err) throw err;
-                    else {
-                        $ = cheerio.load(body);
-                        var hdd = $(body).find('.fs-tsright ul li:nth-child(3)');
-                        hdd = $(hdd).text();
-                        console.log(li_link[i] + hdd);
-                    }
+            var i = 0;
+            var upd = setInterval(function () {
+                request(li_link[i] , function(err, respone , body){
+                    $ = cheerio.load(body);
+                    var  hdd = $(body).find('.fs-tsright ul li:nth-child(3) span');
+                    hdd = $(hdd).text();
+                    var query = "UPDATE laptop_details SET HDD = '" + hdd + "' WHERE Link_sp = '" + li_link[i] + "'";
+                    db.query(query, function(err){
+                        if (err) console.log(query);
+                    })
+                    i++;
+                    if ( i == li_link.length -1 )  clearInterval(upd); 
                 })
-            };
+            }, 500);
         }
     })
+
 }
 

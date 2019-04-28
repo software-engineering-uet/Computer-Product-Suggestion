@@ -14,7 +14,6 @@ exports.details = function (req, res) {
     }
     l (function (err,resu){
         db.query(que, function (err, result) {
-            console.log(resu);
             if (err) throw err;
             else {
                 res.render('chi_tiet.ejs', { message: message, data: (sess.user == undefined) ? "Guest" : sess.user.username, laps: result, diem: resu });
@@ -31,10 +30,9 @@ exports.sosanh = function (req, res) {
         res.render('home.ejs', { message: message, data: "Guest" });
     }
     else {
-        var laps = [];
-        var query = "SELECT * FROM laptop_details WHERE id IN (SELECT lap1 FROM users WHERE username = '" + sess.user.username + "')";
-        query += " OR id IN (SELECT lap2 FROM users WHERE username = '" + sess.user.username + "')";
-        query += " OR id IN (SELECT lap3 FROM users WHERE username = '" + sess.user.username + "')";
+        var query = "SELECT ld.*,d.* FROM laptop_details as ld ,diemLaptop as d WHERE (d.id IN (SELECT lap1 FROM users WHERE username = '" + sess.user.username + "')";
+        query += " OR d.id IN (SELECT lap2 FROM users WHERE username = '" + sess.user.username + "')";
+        query += " OR d.id IN (SELECT lap3 FROM users WHERE username = '" + sess.user.username + "')) AND d.id = ld.id";
         db.query(query, function (err, resu) {
             if (err) console.log(query);
             else {
@@ -54,9 +52,9 @@ exports.them = function (req, res) {
             else {
                 if (result[0].lap1 != null && result[0].lap2 != null && result[0].lap3 != null) {
                     message = "Danh sách so sánh đã tối đa !!!";
-                    var query = "SELECT * FROM laptop_details WHERE id IN (SELECT lap1 FROM users WHERE username = '" + sess.user.username + "')";
-                    query += " OR id IN (SELECT lap2 FROM users WHERE username = '" + sess.user.username + "')";
-                    query += " OR id IN (SELECT lap3 FROM users WHERE username = '" + sess.user.username + "')";
+                    var query = "SELECT ld.*,d.* FROM laptop_details as ld ,diemLaptop as d WHERE (d.id IN (SELECT lap1 FROM users WHERE username = '" + sess.user.username + "')";
+                    query += " OR d.id IN (SELECT lap2 FROM users WHERE username = '" + sess.user.username + "')";
+                    query += " OR d.id IN (SELECT lap3 FROM users WHERE username = '" + sess.user.username + "')) AND d.id = ld.id";
                     db.query(query, function (err, resu) {
                         if (err) console.log(query);
                         else {
@@ -77,9 +75,9 @@ exports.them = function (req, res) {
                             db.query("UPDATE users SET lap3 = " + req.body.id + " WHERE username = '" + user + "'");
                         message = "Đã thêm vào danh sách !!";
                     }
-                    var query = "SELECT * FROM laptop_details WHERE id IN (SELECT lap1 FROM users WHERE username = '" + sess.user.username + "')";
-                    query += " OR id IN (SELECT lap2 FROM users WHERE username = '" + sess.user.username + "')";
-                    query += " OR id IN (SELECT lap3 FROM users WHERE username = '" + sess.user.username + "')";
+                    var query = "SELECT ld.*,d.* FROM laptop_details as ld ,diemLaptop as d WHERE (d.id IN (SELECT lap1 FROM users WHERE username = '" + sess.user.username + "')";
+        query += " OR d.id IN (SELECT lap2 FROM users WHERE username = '" + sess.user.username + "')";
+        query += " OR d.id IN (SELECT lap3 FROM users WHERE username = '" + sess.user.username + "')) AND d.id = ld.id";
                     db.query(query, function (err, resu) {
 
                         res.render('ds_ss.ejs', { message: message, data: sess.user.username, laps: resu });
@@ -101,9 +99,9 @@ exports.xoa = function (req, res) {
         query = "UPDATE users SET lap3 = NULL WHERE username = '" + user + "' AND lap3 = " + id + ";";
         db.query(query);
         message = "Đã xóa sản phẩm !!!";
-        query = "SELECT * FROM laptop_details WHERE id IN (SELECT lap1 FROM users WHERE username = '" + sess.user.username + "')";
-        query += " OR id IN (SELECT lap2 FROM users WHERE username = '" + sess.user.username + "')";
-        query += " OR id IN (SELECT lap3 FROM users WHERE username = '" + sess.user.username + "')";
+        var query = "SELECT ld.*,d.* FROM laptop_details as ld ,diemLaptop as d WHERE (d.id IN (SELECT lap1 FROM users WHERE username = '" + sess.user.username + "')";
+        query += " OR d.id IN (SELECT lap2 FROM users WHERE username = '" + sess.user.username + "')";
+        query += " OR d.id IN (SELECT lap3 FROM users WHERE username = '" + sess.user.username + "')) AND d.id = ld.id";
         db.query(query, function (err, resu) {
             res.render('ds_ss.ejs', { message: message, data: sess.user.username, laps: resu });
         })
