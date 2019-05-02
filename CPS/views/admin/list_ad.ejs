@@ -1,0 +1,21 @@
+<%- include header_ad %>
+<div class="row">
+        <div class="col-lg-12">
+            <h2 style="text-align: center">Danh sách sản phẩm</h2>
+        </div>
+</div>
+<div class="row">
+        <ul class="list-group">
+            <% laps.forEach(function(lap){ %>
+                <li class="list-group-item"><a target="_blank" href=<%="chi-tiet/" + lap.id + "/" + lap.Name.split(" ").join("-").split('/').join('-')%>><%= lap.Name %></a><a onclick="return xoa()" style="float: right; color: red" href=<%= "/admin/quanly/xoa/" + lap.id %>>Xóa</a>
+                    <a style="float: right;margin-right: 15px;" target="_blank" href=<%="chi-tiet/" + lap.id + "/" + lap.Name.split(" ").join("-").split('/').join('-')%>>
+                      Xem  </a></li>
+            <% }) %>   
+              </ul>
+</div>
+<script>
+    function xoa(){
+        return window.confirm("Bạn có chắc chắn muốn xóa sản phẩm này ?");    
+    }
+</script> 
+<%- include footer_ad %>

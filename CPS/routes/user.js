@@ -28,6 +28,7 @@ exports.login = function (req, res) {
             var q = "SELECT * FROM `users` WHERE `username` = '" + username + "' AND password = '" + pass + "';";
             db.query(q, function (err, result) {
                 if (result.length) {
+                    message = "Đăng nhập thành công !"
                     req.session.user = result[0];
                     res.render('home.ejs', { message: message, data: sess.user.username });
                 }

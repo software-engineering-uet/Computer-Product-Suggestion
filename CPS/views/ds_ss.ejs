@@ -40,9 +40,9 @@
                 </th>
                 <% laps.forEach(function(lap) { %>
                 <% if(lap.diemTong == lap_max) { %>
-                <td style="background-color: green; text-align: center"><h3><i><b><%= lap.diemTong %></h3></i></b></td>
+                <td style="background-color: green; text-align: center"><h2><i><b><%= lap.diemTong %></h2></i></b></td>
                 <% } else { %>
-                <td style="text-align: center"><h3><%= lap.diemTong %></h3></td>
+                <td style="text-align: center"><h2><%= lap.diemTong %></h2></td>
                 <% } %>
                 <% }) %>
             </tr>
@@ -110,10 +110,13 @@
             </tr>
             <tr>
                 <th scope="row" style="text-align: center"></th>
+                
                 <% laps.forEach(function(lap) { %>
-                <td><form method="POST" action="/xoasp">
+                <td>
+                    <form method="POST" action="/xoasp">
+                    <button type="button" class="btn btn-info"><a style="color: cornsilk" href=<%="chi-tiet/" + lap.id + "/" + lap.Name.split(" ").join("-").split('/').join('-')%>>Chi tiết</a></button>
                     <input type="hidden" name="id_del" value=<%= lap.id %> />
-                    <button class="btn btn-danger">Xóa sản phẩm</button>
+                    <button style="display: inline" class="btn btn-danger">Xóa sản phẩm</button>
                     </form>
                 </td>
                 <% }) %>
