@@ -15,12 +15,20 @@
     </div>
 </div>
 <!-- /. ROW  -->
-<div class="row text-center pad-top">
+<div class="row text-center pad-top" id="dashboard">
     <div class=" col-md-4">
         <div class="div-square">
             <a href="admin/quanly">
                 <i class="fa fa-list-ul fa-5x"></i>
                 <h4>Quản lý laptop</h4>
+            </a>
+        </div>
+    </div>
+    <div class=" col-md-4">
+        <div class="div-square">
+            <a onclick="linhkien()" style="cursor: pointer;">
+                <i class="fa fa-wrench fa-5x"></i>
+                <h4>Quản lý linh kiện</h4>
             </a>
         </div>
     </div>
@@ -34,13 +42,20 @@
     </div>
     <div class="col-md-4">
         <div class="div-square">
-            <a href="admin/user">
+            <a href="admin/capnhat">
+                <i class="fa fa-fighter-jet fa-5x"></i>
+                <h4>Tự động cập nhật</h4>
+            </a>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="div-square">
+            <a href="admin/users">
                 <i class="fa fa-users fa-5x"></i>
                 <h4>See Users</h4>
             </a>
         </div>
     </div>
-    <div class="col-md-2"></div>
     <div class="col-md-4">
         <div class="div-square">
             <a href="admin/dexuat">
@@ -49,13 +64,32 @@
             </a>
         </div>
     </div>
+</div>
+<div class="row text-center pad-top" id="linhkien" style="display: none">
+    <div class="col-md-2"></div>
     <div class="col-md-4">
         <div class="div-square">
-            <a href="blank.html">
-                <i class="fa fa-bar-chart-o fa-5x"></i>
-                <h4>Thống kê</h4>
+            <a href="admin/cpu">
+                <i class="fa fa-cogs fa-5x"></i>
+                <h4>CPU</h4>
+            </a>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="div-square">
+            <a href="admin/ram">
+                <i class="fa fa-asterisk fa-5x"></i>
+                <h4>RAM</h4>
             </a>
         </div>
     </div>
 </div>
+<script>
+    function linhkien() {
+        var lk = document.getElementById("linhkien");
+        var db = document.getElementById("dashboard");
+        lk.style.display = "block";
+        db.style.display = "none";
+    }
+</script>
 <%- include footer_ad %>

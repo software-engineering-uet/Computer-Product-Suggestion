@@ -16,15 +16,18 @@ exports.lc = function (req, res) {
         if (lc == "quanly") {
             var que = "SELECT id,Name FROM laptop_details";
             db.query(que, function (err, resu, f) {
-                res.render("admin/list_ad", { message: message, laps: resu, flash: req.flash('msg') });
+                res.render("admin/list_ad", { message: message, laps: resu});
             })
 
         }
         if (lc == "capnhat") {
 
         }
-        if (lc == "user") {
-
+        if (lc == "users") {
+            var que = "SELECT *FROM users";
+            db.query(que, function (err, resu, f) {
+                res.render("admin/users", { message: message, users: resu});
+            })
         }
         if (lc == "dexuat") {
 
@@ -40,11 +43,27 @@ exports.xoa = function (req, res) {
     var sess = req.session;
     var id = req.params.id;
     if (sess.user != undefined && sess.user.username == "admin") {
-        var que = "SELECT id,Name FROM laptop_details";
+        //var que = "SELECT id,Name FROM laptop_details";
+        var que = "DELETE FROM laptop_details WHERE id= " + id ;
         db.query(que, function (err, resu, f) {
-            req.flash('msg', "Xóa sản phẩm thành công");
-            message = res.locals.message = req.flash();
             res.redirect('/admin/quanly');
+        })
+    }
+    else {
+        var message = "Bạn không có quyền truy cập !"
+        res.render('home.ejs', { message: message, data: (sess.user == undefined) ? "Guest" : sess.user.username });
+    }
+}
+
+exports.xoa_user = function (req, res) {
+    var message = "";
+    var sess = req.session;
+    var id = req.params.id;
+    if (sess.user != undefined && sess.user.username == "admin") {
+        //var que = "SELECT id,Name FROM laptop_details";
+        var que = "DELETE FROM users WHERE id= " + id ;
+        db.query(que, function (err, resu, f) {
+            res.redirect('/admin/users');
         })
     }
     else {

@@ -55,4 +55,5 @@ app.get("/tat-ca/:lc", kqs.lch);
 app.get("/admin", admin.home);
 app.get("/admin/:lc", admin.lc);
 app.get("/admin/quanly/xoa/:id", admin.xoa);
+app.get("/admin/users/xoa/:id", admin.xoa_user);
 update_bm.upd_hdd();

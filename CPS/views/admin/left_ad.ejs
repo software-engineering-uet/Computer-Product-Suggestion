@@ -1,28 +1,44 @@
 <nav class="navbar-default navbar-side" role="navigation">
-        <div class="sidebar-collapse">
-            <ul class="nav" id="main-menu">
-                <li class="active-link">
-                    <a href="admin/quanly"><i class="fa fa-desktop "></i>Danh sách laptop</a>
+    <div class="sidebar-collapse">
+        <ul class="nav" id="main-menu">
+            <li class="active-link">
+                <a href="admin/quanly"><i class="fa fa-desktop "></i>Danh sách laptop</a>
+            </li>
+            <li>
+                <a style="cursor: pointer;" onclick="linhkien_l()"><i class="fa fa-wrench"></i>Danh sách linh kiện</a>
+            </li>
+            <div id="linhkien_l" style="display: none">
+                <li>
+                    <a href="admin/cpu" style="text-decoration: none;">&nbsp;&nbsp;&nbsp;&nbsp;CPU</a>
                 </li>
                 <li>
-                    <a href="admin/capnhat"><i class="fa fa-fighter-jet"></i>Tự động cập nhật laptop</a>
+                    <a href="admin/vga" style="text-decoration: none;">&nbsp;&nbsp;&nbsp;&nbsp;VGA</a>
                 </li>
-                <li>
-                    <a href="admin/themlaptop"><i class="fa fa-table "></i>Thêm laptop mới</a>
-                </li>
-                <li>
-                    <a href="admin/user"><i class="fa fa-edit "></i>Quản lý user</a>
-                </li>
-                <li>
-                    <a href="admin/dexuat"><i class="fa fa-qrcode "></i>Đề xuất laptop</a>
-                </li>
-                <li>
-                    <a href="admin/thongke"><i class="fa fa-bar-chart-o"></i>Thống kê</a>
-                </li>
+            </div>
+            <li>
+                <a href="admin/capnhat"><i class="fa fa-fighter-jet"></i>Tự động cập nhật laptop</a>
+            </li>
+            <li>
+                <a href="admin/themlaptop"><i class="fa fa-table "></i>Thêm laptop mới</a>
+            </li>
+            <li>
+                <a href="admin/users"><i class="fa fa-edit "></i>Quản lý user</a>
+            </li>
+            <li>
+                <a href="admin/dexuat"><i class="fa fa-qrcode "></i>Đề xuất laptop</a>
+            </li>
 
-                
 
-            </ul>
-        </div>
 
-    </nav>
+
+        </ul>
+    </div>
+
+</nav>
+<script>
+    function linhkien_l() {
+        var lk = document.getElementById("linhkien_l");
+        if (lk.style.display == "block") lk.style.display = "none";
+        else lk.style.display = "block";
+    }
+</script>

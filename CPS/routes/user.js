@@ -6,24 +6,31 @@ exports.login = function (req, res) {
         var post = req.body;
         var username = post.username_login;
         if (username == undefined) {
-            var username1 = post.username_signup;
-            var pass = post.password_signup;
-            var mail = post.email;
-            var q = "INSERT INTO users(username, password, email) VALUES ('" + username1 + "','" + pass + "','" + mail + "')";
-            db.query(q, function (err, result) {
+            var username1 = post.username_signup.split(" ").join("");
+            var pass = post.password_signup.split(" ").join("");
+            var mail = post.email.split(" ").join("");
+            if (username1 == '' || pass == '' || mail.indexOf('@') == -1) {
+                message = 'Đăng ký thất bại ! Hãy nhập đúng định dạng !';
+                res.render('home.ejs', { message: message, data: (sess.user == undefined) ? "Guest" : sess.user.username });
+            }
+            else {
+                var q = "INSERT INTO users(username, password, email) VALUES ('" + username1 + "','" + pass + "','" + mail + "')";
+                db.query(q, function (err, result) {
 
-                if (err) {
-                    message = 'Tài khoản đã tồn tại !';
-                    res.render('home.ejs', { message: message, data: (sess.user == undefined) ? "Guest" : sess.user.username });
-                }
-                else {
-                    req.session.user = result[0];
-                    message = 'Tạo tài khoản thành công !';
-                    res.render('home.ejs', { message: message, data: 'Guest' });
-                }
+                    if (err) {
+                        message = 'Tài khoản đã tồn tại !';
+                        res.render('home.ejs', { message: message, data: (sess.user == undefined) ? "Guest" : sess.user.username });
+                    }
+                    else {
+                        req.session.user = result[0];
+                        message = 'Tạo tài khoản thành công !';
+                        res.render('home.ejs', { message: message, data: 'Guest' });
+                    }
 
-            })
-        } else {
+                })
+            }
+        }
+        else {
             var pass = post.pass_login;
             var q = "SELECT * FROM `users` WHERE `username` = '" + username + "' AND password = '" + pass + "';";
             db.query(q, function (err, result) {
@@ -51,47 +58,63 @@ exports.search = function (req, res) {
     db.query(que, function (err, result) {
         if (err) throw err;
         else {
-            res.render('search.ejs', { message: message, data: (sess.user == undefined) ? "Guest" : sess.user.username, laps : result });
+            res.render('search.ejs', { message: message, data: (sess.user == undefined) ? "Guest" : sess.user.username, laps: result });
         }
     })
     //DS SẢN PHẨM
 
 
-};  
-exports.kq = function(req, res){
+};
+exports.kq = function (req, res) {
     var nd = req.params.nd;
     var message = "";
     var sess = req.session;
-    nd=nd.split("&").join(" ");
-    nd=nd.split("-").join("");
-    var que = "SELECT *FROM laptop_details WHERE Name LIKE '%" + nd +"%'";
-    db.query(que , function(err, result){
+    nd = nd.split("&").join(" ");
+    nd = nd.split("-").join("");
+    var que = "SELECT *FROM laptop_details WHERE Name LIKE '%" + nd + "%'";
+    db.query(que, function (err, result) {
         if (err) throw err;
         else {
-            res.render('search.ejs', { message: message, data: (sess.user == undefined) ? "Guest" : sess.user.username, laps : result });
+            res.render('search.ejs', { message: message, data: (sess.user == undefined) ? "Guest" : sess.user.username, laps: result });
         }
     })
 }
-exports.dexuat = function (req,res ){
+exports.dexuat = function (req, res) {
     var message1 = "";
     var sess = req.session;
     if (sess.user == undefined) {
         message1 = "Bạn cần đăng nhập để thực hiện chức năng này !";
-        res.render('de_xuat.ejs', { message: "", message1 : message1 , data: (sess.user == undefined) ? "Guest" : sess.user.username });
+        res.render('de_xuat.ejs', { message: "", message1: message1, data: (sess.user == undefined) ? "Guest" : sess.user.username });
     }
     else {
-        res.render('de_xuat.ejs', { message: "", message1 : message1 , data: sess.user.username });
+        res.render('de_xuat.ejs', { message: "", message1: message1, data: sess.user.username });
     }
 }
-exports.guidexuat = function (req,res){
-    if (req.method = "POST"){
+exports.guidexuat = function (req, res) {
+    if (req.method = "POST") {
         var message1 = "";
         var sess = req.session;
         var name = req.body.name;
-        var link =req.body.link;
         var username = sess.user.username;
-        var que = "INSERT INTO dexuat(username,Name,Link_sp) VALUES ('" + username + "','" + name + "','" + link +"')";
-        db.query(que);
-        res.render('de_xuat.ejs', { message: "", message1 : message1 , data: sess.user.username });
+        var link = req.body.link;
+        if (link.trim() == "") {
+            res.render('de_xuat.ejs', { message: "Hãy nhập link sản phẩm", message1: message1, data: username });
+        }
+        else {
+            link = link.split('https').join('');
+
+            var que = "SELECT Name FROM laptop_details WHERE Link_sp LIKE '%" + link + "%'";
+            db.query(que, function (err, resu) {
+                if (resu.length > 0) {
+                    res.render('de_xuat.ejs', { message: "Đã có sản phẩm " + resu[0].Name, message1: "", data: username });
+                }
+                else {
+                    que = "INSERT INTO dexuat(username,Name,Link_sp) VALUES ('" + username + "','" + name + "','" + link + "')";
+                    db.query(que);
+                    res.render('de_xuat.ejs', { message: "Chúng tôi đã nhận được đề xuất của bạn ! Cảm ơn bạn !", message1: message1, data: username });
+                }
+            })
+
+        }
     }
 }

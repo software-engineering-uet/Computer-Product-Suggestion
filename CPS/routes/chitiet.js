@@ -3,8 +3,8 @@ exports.details = function (req, res) {
     var message = "";
     var id = req.params.id;
     var que = "SELECT *FROM laptop_details WHERE id = " + id;
-    for (var i = 1; i < 5; i++) {
-        que += " OR id = " + ((Number(id) + i) % 156 + 1);
+    for (var i = 1; i < 50; i++) {
+        que += " OR id = " + ((Number(id) + i) % 150 + 1);
     }
     var q = "SELECT * FROM diemLaptop WHERE id = " + id;
     var l = function (callback) {

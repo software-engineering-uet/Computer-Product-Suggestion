@@ -1,0 +1,37 @@
+<%- include header_ad %>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h2 style="text-align: center">Danh sách users</h2>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">Username</th>
+            <th scope="col">Password</th>
+            <th scope="col">Email</th>
+            <th scope="col">Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% users.forEach(function(user){ %>
+            <% if (user.username != "admin") { %>
+        <tr>
+            <td><%=user.id %></td>
+            <td><%=user.username %></td>
+            <td><%=user.password %></td>
+            <td><%=user.email%></td>
+            <td><a style="color: red" href=<%= "/admin/users/xoa/" + user.id %> onclick="return xoa()">Xoá</a></td>
+        </tr>
+        <%}})%>
+    </tbody>
+</table>
+<script>
+    function xoa() {
+        return window.confirm("Bạn có chắc chắn muốn xóa người dùng này ?");
+    }
+</script>
+<%- include footer_ad %>

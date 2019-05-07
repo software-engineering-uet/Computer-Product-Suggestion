@@ -55,7 +55,7 @@
     <h3> Các sản phẩm khác </h3>
     <div class="container">
         <div class="row">
-            <% for(var i = 1 ; i < 5 ;i++) { %>
+            <% for(var i = 1 ; i < 5 ;i++) { if (laps[i] != undefined ) {%>
             <div class="col-md-3">
                 <a href=<%="chi-tiet/" + laps[i].id + "/" + laps[i].Name.split(" ").join("-").split('/').join('-')%>
                     style="color:black"><img src=<%=laps[i].Src_img %>>
@@ -65,7 +65,7 @@
                 <h3><b><i><%=pri %></i></b></h3>
 
             </div>
-            <% } %>
+            <% } }%>
         </div>
     </div>
 
