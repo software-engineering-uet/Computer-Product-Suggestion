@@ -16,7 +16,7 @@ exports.login = function (req, res) {
             else {
                 var q = "INSERT INTO users(username, password, email) VALUES ('" + username1 + "','" + pass + "','" + mail + "')";
                 db.query(q, function (err, result) {
-
+                    
                     if (err) {
                         message = 'Tài khoản đã tồn tại !';
                         res.render('home.ejs', { message: message, data: (sess.user == undefined) ? "Guest" : sess.user.username });

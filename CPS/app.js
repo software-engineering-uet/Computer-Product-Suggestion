@@ -43,7 +43,6 @@ app.post('/', user.login);
 app.get("/search", user.search);
 app.get("/de-xuat", user.dexuat);
 app.post("/de-xuat", user.guidexuat);
-
 app.get("/chi-tiet/:id/:name", chitiet.details);
 app.post("/danhsach", chitiet.them);
 app.post("/xoasp", chitiet.xoa);
@@ -52,8 +51,17 @@ app.get("/danhsach", chitiet.them);
 app.get("/search/:nd", user.kq);
 app.get("/tat-ca", kqs.tatca);
 app.get("/tat-ca/:lc", kqs.lch);
+
+
 app.get("/admin", admin.home);
 app.get("/admin/:lc", admin.lc);
 app.get("/admin/quanly/xoa/:id", admin.xoa);
 app.get("/admin/users/xoa/:id", admin.xoa_user);
+app.get("/admin/lk/cpu", admin.cpu);
+app.get("/admin/lk/cpu/:id", admin.xoa_cpu);
+app.post("/admin/lk/cpu", admin.cpu);
+app.get("/admin/lk/vga", admin.vga);
+app.get("/admin/lk/vga/:id", admin.xoa_vga);
+app.post("/admin/lk/vga", admin.vga);
+//app.get("/admin/linhkien/vga", admin.vga);
 update_bm.upd_hdd();

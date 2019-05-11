@@ -1,0 +1,65 @@
+<%- include header_ad %>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h2 style="text-align: center">Danh sách linh kiện <%= lk %></h2>
+        <button style="float:right" class="btn btn-info" data-toggle="modal" data-target="#myModal">Thêm mới</button>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">Tên</th>
+            <th scope="col">Điểm</th>
+            <th scope="col">Điểm/100</th>
+            <th scope="col">Hành động</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        <% list.forEach(function(one){ %>
+        <tr>
+            <td><%=one.id %></td>
+            <td><%=one.Name %></td>
+            <td><%=one.Diem %></td>
+            <td><%=one.Diem100 %></td>
+            <td scope="col"><a style="color:red;" onclick="xoa()" href=<%="/admin/lk/" + lk  + "/" + one.id %>>Xoá</a></td>
+        </tr>
+        <%})%>
+    </tbody>
+</table>
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Thêm mới/Chỉnh sửa linh kiện</h4>
+        </div>
+        <div class="modal-body">
+            <form action=<%="/admin/lk/" + lk%> method="POST">
+            <label style="margin-right: 50px">Tên</label>
+          <input style ="width: 80%; margin-bottom: 50px" type="text" name = "name" >
+          <label style="margin-right: 20px">Điểm số</label>
+          <input style ="width: 80%" type="number" name = "diem" >    
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary">Xác nhận</button>
+        </form>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+<script>
+    function xoa() {
+        return window.confirm("Bạn có chắc chắn muốn xóa linh kiện này ?");
+    }
+    function getName() {
+    }
+</script>
+<%- include footer_ad %>
