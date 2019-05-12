@@ -13,7 +13,6 @@
             <th scope="col">id</th>
             <th scope="col">Tên</th>
             <th scope="col">Điểm</th>
-            <th scope="col">Điểm/100</th>
             <th scope="col">Hành động</th>
             
         </tr>
@@ -24,7 +23,6 @@
             <td><%=one.id %></td>
             <td><%=one.Name %></td>
             <td><%=one.Diem %></td>
-            <td><%=one.Diem100 %></td>
             <td scope="col"><a style="color:red;" onclick="xoa()" href=<%="/admin/lk/" + lk  + "/" + one.id %>>Xoá</a></td>
         </tr>
         <%})%>

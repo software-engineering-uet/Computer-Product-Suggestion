@@ -63,5 +63,6 @@ app.post("/admin/lk/cpu", admin.cpu);
 app.get("/admin/lk/vga", admin.vga);
 app.get("/admin/lk/vga/:id", admin.xoa_vga);
 app.post("/admin/lk/vga", admin.vga);
-//app.get("/admin/linhkien/vga", admin.vga);
-update_bm.upd_hdd();
+app.post("/admin/them/themlap", admin.themlap);
+app.get("/admin/dx/:id", admin.dx);
+app.get("/admin/dx/xoa/:id", admin.xoa_dx);

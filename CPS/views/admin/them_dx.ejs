@@ -1,0 +1,86 @@
+<%- include header_ad %>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h2 style="text-align: center">Thêm laptop mới</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <form method="POST" action="/admin/them/themlap">
+            <div class="form-group">
+                <label>Tên laptop</label>
+                <input class="form-control" placeholder="Name" name="ten">
+            </div>
+
+            <div class="form-group">
+                <label>Link sản phẩm</label>
+                <input class="form-control" placeholder="Link sp" name="linksp">
+            </div>
+
+            <div class="form-group">
+                <label>Link hình ảnh</label>
+                <input class="form-control" placeholder="Link ảnh" name="linkanh">
+            </div>
+
+            <div class="form-group">
+                <label>Giá bán</label>
+                <input type="number" class="form-control" placeholder="Giá bán" name="giaban">
+            </div>
+
+            <div class="form-group">
+                <label>Màn hình</label>
+                <input class="form-control" placeholder="Màn hình" name="manhinh">
+            </div>
+
+            <div class="form-group">
+                <label>Ram</label>
+                <input class="form-control" placeholder="RAM" name="ram">
+            </div>
+
+            <div class="form-group">
+                <label>Ổ cứng</label>
+                <input class="form-control" placeholder="Ổ cứng" name="hdd">
+            </div>
+
+            <div class="form-group">
+                <label>CPU</label>
+                <select class="form-control" onchange="getcpu(this);">
+                    <option></option>
+                    <% cpus.forEach(function(cpu) { %>
+                    <option><%=cpu.Name%></option>
+                    <% })%>
+                </select>
+                <input name="cpu" type="hidden">
+            </div>
+
+            <div class="form-group">
+                <label>Card màn hình</label>
+                <select class="form-control" onchange="getvga(this);">
+                    <option></option>
+                    <% vgas.forEach(function(vga) { %>
+                    <option><%=vga.Name%></option>
+                    <% })%>
+                </select>
+                <input name="vga" type="hidden">
+            </div>
+            <button class="btn btn-success">Thêm mới</button>
+            <a class="btn btn-danger" href="/admin" role="button" type="buton">Huỷ bỏ</a>
+        </form>
+    </div>
+    <iframe style="height: 800px;" class="col-md-6" src="https://fptshop.com.vn/may-tinh-xach-tay/hp-envy-x360-13-ag0046au-r7-2700u-8gb">
+    </iframe>
+</div>
+<script>
+    function getcpu(sel) {
+        var text = sel.options[sel.selectedIndex].text;
+        var cpu = document.getElementsByName("cpu");
+        cpu[0].value = text;
+    }
+    function getvga(sel) {
+        var text = sel.options[sel.selectedIndex].text;
+        var vga = document.getElementsByName("vga");
+        vga[0].value = text;
+    }
+</script>
+<%- include footer_ad %>

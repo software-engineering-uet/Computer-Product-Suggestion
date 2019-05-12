@@ -1,0 +1,38 @@
+<%- include header_ad %>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h2 style="text-align: center">Danh sách đề xuất</h2>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">Username</th>
+            <th scope="col">Tên sản phẩm</th>
+            <th scope="col">Link sản phẩm</th>
+            <th scope="col">Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% dx.forEach(function(d){ %>
+        <tr>
+            <td><%=d.id %></td>
+            <td><%=d.username %></td>
+            <td><%=d.Name %></td>
+            <td><%=d.Link_sp%></td>
+            <td><a style="color: blueviolet; margin-right: 15px" href=<%= "/admin/dx/" + d.id %>>Thêm</a>
+                <a style="color: red;" href=<%= "/admin/dx/xoa/" + d.id %> onclick="return xoa()">Xoá</a>
+                </td>
+        </tr>
+        <%})%>
+    </tbody>
+</table>
+<script>
+    function xoa() {
+        return window.confirm("Bạn có chắc chắn muốn xóa đề xuất này ?");
+    }
+</script>
+<%- include footer_ad %>

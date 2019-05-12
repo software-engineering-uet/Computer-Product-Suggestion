@@ -101,7 +101,7 @@ exports.guidexuat = function (req, res) {
             res.render('de_xuat.ejs', { message: "Hãy nhập link sản phẩm", message1: message1, data: username });
         }
         else {
-            link = link.split('https').join('');
+            link = link.split('https://').join('');
 
             var que = "SELECT Name FROM laptop_details WHERE Link_sp LIKE '%" + link + "%'";
             db.query(que, function (err, resu) {
