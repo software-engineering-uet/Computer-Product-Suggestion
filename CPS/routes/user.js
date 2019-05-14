@@ -109,6 +109,8 @@ exports.guidexuat = function (req, res) {
                     res.render('de_xuat.ejs', { message: "Đã có sản phẩm " + resu[0].Name, message1: "", data: username });
                 }
                 else {
+                    var s = "https://";
+                    link = s+link;
                     que = "INSERT INTO dexuat(username,Name,Link_sp) VALUES ('" + username + "','" + name + "','" + link + "')";
                     db.query(que);
                     res.render('de_xuat.ejs', { message: "Chúng tôi đã nhận được đề xuất của bạn ! Cảm ơn bạn !", message1: message1, data: username });

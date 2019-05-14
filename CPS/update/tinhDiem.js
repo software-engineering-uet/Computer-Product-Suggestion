@@ -1,4 +1,5 @@
-exports.tinhDiemRam = function (ram, bus_max) {
+exports.tinhDiemRam = function (ram) {
+    var  bus_max = 2666;
     var score = 0;
     var temp = ram.split(" ").join("").toLowerCase();
     if (temp.indexOf("gb") == 1) num = Number(temp[temp.indexOf("gb") - 1]);

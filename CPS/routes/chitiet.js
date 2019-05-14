@@ -3,16 +3,25 @@ exports.details = function (req, res) {
     var message = "";
     var id = req.params.id;
     var que = "SELECT *FROM laptop_details WHERE id = " + id;
-    for (var i = 1; i < 50; i++) {
-        que += " OR id = " + ((Number(id) + i) % 150 + 1);
+    if (id <= 41) {
+        for (var i = 1; i < 10; i++) {
+            que += " OR id = " + ((Number(id) + i));
+        }
+        que += " ORDER BY `laptop_details`.`id` ASC";
+    }
+    else {
+        for (var i = 1; i < 40; i++) {
+            que += " OR id = " + ((Number(id) - i));
+        }
+        que += " ORDER BY `laptop_details`.`id` DESC";
     }
     var q = "SELECT * FROM diemLaptop WHERE id = " + id;
     var l = function (callback) {
-        db.query(q,function(err,resu){
-            callback (null, resu)
+        db.query(q, function (err, resu) {
+            callback(null, resu)
         })
     }
-    l (function (err,resu){
+    l(function (err, resu) {
         db.query(que, function (err, result) {
             if (err) throw err;
             else {
@@ -20,7 +29,7 @@ exports.details = function (req, res) {
             }
         })
     })
-    
+
 }
 exports.sosanh = function (req, res) {
     var sess = req.session;
@@ -76,8 +85,8 @@ exports.them = function (req, res) {
                         message = "Đã thêm vào danh sách !!";
                     }
                     var query = "SELECT ld.*,d.* FROM laptop_details as ld ,diemLaptop as d WHERE (d.id IN (SELECT lap1 FROM users WHERE username = '" + sess.user.username + "')";
-        query += " OR d.id IN (SELECT lap2 FROM users WHERE username = '" + sess.user.username + "')";
-        query += " OR d.id IN (SELECT lap3 FROM users WHERE username = '" + sess.user.username + "')) AND d.id = ld.id";
+                    query += " OR d.id IN (SELECT lap2 FROM users WHERE username = '" + sess.user.username + "')";
+                    query += " OR d.id IN (SELECT lap3 FROM users WHERE username = '" + sess.user.username + "')) AND d.id = ld.id";
                     db.query(query, function (err, resu) {
 
                         res.render('ds_ss.ejs', { message: message, data: sess.user.username, laps: resu });

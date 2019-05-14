@@ -1,8 +1,18 @@
 <%- include header_ad %>
-
+<style>
+    iframe {
+        margin-top: 200px;
+        height: 2050px;
+        width: 1500px;
+        position: relative;
+        top: -1500px;
+        right: 900px;
+        border: 0;
+    }
+</style>
 <div class="row">
     <div class="col-lg-12">
-        <h2 style="text-align: center">Thêm laptop mới</h2>
+        <h2 style="text-align: center">Thêm laptop <%= name %></h2>
     </div>
 </div>
 <div class="row">
@@ -10,12 +20,12 @@
         <form method="POST" action="/admin/them/themlap">
             <div class="form-group">
                 <label>Tên laptop</label>
-                <input class="form-control" placeholder="Name" name="ten">
+                <input class="form-control" placeholder="Name" name="ten" value=<%=name%>>
             </div>
 
             <div class="form-group">
                 <label>Link sản phẩm</label>
-                <input class="form-control" placeholder="Link sp" name="linksp">
+                <input class="form-control" placeholder="Link sp" name="linksp" value=<%= link %>>
             </div>
 
             <div class="form-group">
@@ -68,8 +78,10 @@
             <a class="btn btn-danger" href="/admin" role="button" type="buton">Huỷ bỏ</a>
         </form>
     </div>
-    <iframe style="height: 800px;" class="col-md-6" src="https://fptshop.com.vn/may-tinh-xach-tay/hp-envy-x360-13-ag0046au-r7-2700u-8gb">
-    </iframe>
+    <div style="overflow: hidden; height: 800px;" class="col-md-6">
+        <iframe src=<%= link %>></iframe>
+    </div>
+
 </div>
 <script>
     function getcpu(sel) {
