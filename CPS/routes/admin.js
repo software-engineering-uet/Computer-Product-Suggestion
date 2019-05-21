@@ -3,7 +3,7 @@ var download = require('image-downloader');
 exports.home = function (req, res) {
     var sess = req.session;
     if (sess.user != undefined && sess.user.username == "admin") {
-        res.render("admin/index_ad");
+        res.render("admin/index_ad", {message : ""});
     }
     else {
         var message = "Bạn không có quyền truy cập !"
@@ -44,7 +44,7 @@ exports.lc = function (req, res) {
         if (lc == "dexuat") {
             var que = "SELECT * FROM dexuat";
             db.query(que, function (err, resu) {
-                res.render("admin/dexuat", { dx: resu });
+                res.render("admin/dexuat", { dx: resu, message : "" });
             })
         }
     }
@@ -62,7 +62,11 @@ exports.xoa = function (req, res) {
         var que = "DELETE FROM laptop_details WHERE id= " + id;
         db.query("DELETE FROM diemLaptop WHERE id= " + id);
         db.query(que, function (err, resu, f) {
-            res.redirect('/admin/quanly');
+            message = "Xoá laptop thành công !";
+            var que = "SELECT id,Name FROM laptop_details";
+            db.query(que, function (err, resu, f) {
+                res.render("admin/list_ad", { message: message, laps: resu });
+            })
         })
     }
     else {
@@ -79,7 +83,11 @@ exports.xoa_user = function (req, res) {
         //var que = "SELECT id,Name FROM laptop_details";
         var que = "DELETE FROM users WHERE id= " + id;
         db.query(que, function (err, resu, f) {
-            res.redirect('/admin/users');
+            message = "Đã xoá user !";
+            var que = "SELECT *FROM users";
+            db.query(que, function (err, resu, f) {
+                res.render("admin/users", { message: message, users: resu });
+            })
         })
     }
     else {
@@ -105,12 +113,16 @@ exports.cpu = function (req, res) {
                 db.query("UPDATE DiemCPU SET Diem100 = " + d100 + "WHERE id = '" + cpu.id + "'");
             })
         })
+        que = "SELECT * FROM DiemCPU ";
+        db.query(que, function (err, resu, f) {
+            res.render('admin/list_lk', { list: resu, lk: "cpu", message : "Thêm linh kiện thành công !" });
+        })
     }
     if (sess.user != undefined && sess.user.username == "admin") {
         //var que = "SELECT id,Name FROM laptop_details";
         var que = "SELECT * FROM DiemCPU ";
         db.query(que, function (err, resu, f) {
-            res.render('admin/list_lk', { list: resu, lk: "cpu" });
+            res.render('admin/list_lk', { list: resu, lk: "cpu", message : "" });
         })
     }
     else {
@@ -127,7 +139,12 @@ exports.xoa_cpu = function (req, res) {
         //var que = "SELECT id,Name FROM laptop_details";
         var que = "DELETE FROM DiemCPU WHERE id= " + id;
         db.query(que);
-        res.redirect('/admin/lk/cpu');
+        message = "Xoá CPU thành công";
+        var que = "SELECT * FROM DiemCPU ";
+        db.query(que, function (err, resu, f) {
+            res.render('admin/list_lk', { list: resu, lk: "cpu", message : message });
+        })
+        
     }
     else {
         var message = "Bạn không có quyền truy cập !"
@@ -154,12 +171,16 @@ exports.vga = function (req, res) {
             })
 
         })
+        var que = "SELECT * FROM DiemVGA ";
+        db.query(que, function (err, resu, f) {
+            res.render('admin/list_lk', { list: resu, lk: "vga", message : "THêm linh kiện thành công !" });
+        })
     }
     if (sess.user != undefined && sess.user.username == "admin") {
         //var que = "SELECT id,Name FROM laptop_details";
         var que = "SELECT * FROM DiemVGA ";
         db.query(que, function (err, resu, f) {
-            res.render('admin/list_lk', { list: resu, lk: "vga" });
+            res.render('admin/list_lk', { list: resu, lk: "vga", message : "" });
         })
     }
     else {
@@ -176,7 +197,10 @@ exports.xoa_vga = function (req, res) {
         //var que = "SELECT id,Name FROM laptop_details";
         var que = "DELETE FROM DiemVGA WHERE id= " + id;
         db.query(que);
-        res.redirect('/admin/lk/vga');
+        var que = "SELECT * FROM DiemVGA ";
+        db.query(que, function (err, resu, f) {
+            res.render('admin/list_lk', { list: resu, lk: "vga", message : "Xoá VGA thành công !" });
+        })
     }
     else {
         var message = "Bạn không có quyền truy cập !"
@@ -323,7 +347,10 @@ exports.xoa_dx = function (req, res) {
 
         var que = "DELETE FROM dexuat WHERE id= " + id;
         db.query(que);
-        res.redirect('/admin/dexuat');
+        que = "SELECT * FROM dexuat";
+            db.query(que, function (err, resu) {
+                res.render("admin/dexuat", { dx: resu, message : "Xoá đề xuất thành công !" });
+            })
     }
     else {
         var message = "Bạn không có quyền truy cập !"
@@ -350,7 +377,7 @@ exports.dx = function (req, res) {
         f(function (err, cpu) {
             f1(function (err, link) {
                 db.query("SELECT Name FROM DiemVGA ORDER BY Name ASC", function (err, vga) {
-                    res.render("admin/them_dx", { cpus: cpu, vgas: vga, link: link[0].Link_sp, name: link[0].Name });
+                    res.render("admin/them_dx", { cpus: cpu, vgas: vga, link: link[0].Link_sp, name: link[0].Name, message : "" });
                 })
             })
         })

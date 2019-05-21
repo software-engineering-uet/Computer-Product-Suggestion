@@ -23,7 +23,7 @@
             <td><%=one.id %></td>
             <td><%=one.Name %></td>
             <td><%=one.Diem %></td>
-            <td scope="col"><a style="color:red;" onclick="xoa()" href=<%="/admin/lk/" + lk  + "/" + one.id %>>Xoá</a></td>
+            <td scope="col"><a style="color:red;" onclick="return xoa()" href=<%="/admin/lk/" + lk  + "/" + one.id %>>Xoá</a></td>
         </tr>
         <%})%>
     </tbody>
@@ -56,8 +56,6 @@
 <script>
     function xoa() {
         return window.confirm("Bạn có chắc chắn muốn xóa linh kiện này ?");
-    }
-    function getName() {
     }
 </script>
 <%- include footer_ad %>

@@ -11,6 +11,7 @@ var chitiet = require('./routes/chitiet');
 var admin = require('./routes/admin')
 var session = require('express-session');
 var bodyParser = require("body-parser");
+
 app.use(flash());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -36,7 +37,7 @@ app.use(session({
   saveUninitialized: true,
   cookie: { maxAge: 60000000000 }
 }))
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
 
 app.get("/", user.login);
 app.post('/', user.login);

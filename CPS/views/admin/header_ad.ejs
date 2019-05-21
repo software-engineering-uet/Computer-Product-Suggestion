@@ -27,7 +27,19 @@
               </span>
           </div>
       </div>
+      
       <%- include left_ad %>
+      <% if (message.length > 0) { %>
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-9 ">
+                <div class="alert alert-info">
+                    <strong><%= message %></strong>
+                </div>
+        
+            </div>
+        </div>
+        <% } %>
       <body>
             <div id="page-wrapper">
                 <div id="page-inner">
